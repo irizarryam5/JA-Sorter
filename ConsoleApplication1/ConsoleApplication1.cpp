@@ -41,7 +41,7 @@ static std::vector<std::string> convertCsvHashToVector(const std::string& list_p
 static std::vector<std::vector<std::string>> generateListOfLists(const std::vector<std::string>& list_paths);
 static std::vector<listElement> convertFullListToVector(const std::string& full_list_path);
 static std::vector<clientRequest> convertRequestsToVector(const std::string& req_list_path);
-static std::vector<std::vector<listElement>> listSplitter(const clientRequest& req_list, const std::vector<listElement>& full_list);
+static std::vector<std::vector<int>> listSplitter(const clientRequest& client_req, const std::vector<listElement>& full_list);
 static std::vector<listElement> generateExportableList(const clientRequest& req_list, std::vector<listElement>& full_list, const std::vector<std::string>& hash);
 static zipBounds getStateZipBounds(const int& zip);
 
@@ -498,8 +498,8 @@ static std::vector<clientRequest> convertRequestsToVector(const std::string& req
 }
 
 
-static std::vector<std::vector<listElement>> listSplitter(const clientRequest& client_req, const std::vector<listElement>& full_list) {
-	std::vector<std::vector<listElement>> listToReturn(3);
+static std::vector<std::vector<int>> listSplitter(const clientRequest& client_req, const std::vector<listElement>& full_list) {
+	std::vector<std::vector<int>> listToReturn(3);
 	listToReturn.reserve(58000);
 	std::vector<listElement> listToSplit = full_list;
 	auto rng = std::default_random_engine{};
@@ -510,11 +510,11 @@ static std::vector<std::vector<listElement>> listSplitter(const clientRequest& c
 		bool condition = el.zip<1000 ? ((static_cast<double>(el.zip) / 1000) == (static_cast<double>(client_req.preferredZipCode) / 1000)) : ((el.zip / 1000) == (client_req.preferredZipCode / 1000));
 
 		if (condition) {
-			listToReturn[0].push_back(el);
+			listToReturn[0].push_back(el.id);
 		} else if (el.zip >= zipBoundaries.lower && el.zip <= zipBoundaries.upper ) {
-			listToReturn[1].push_back(el);
+			listToReturn[1].push_back(el.id);
 		} else {
-			listToReturn[2].push_back(el);
+			listToReturn[2].push_back(el.id);
 		}
 	}
 
@@ -539,13 +539,13 @@ static std::vector<listElement> generateExportableList(const clientRequest& clie
 	
 	//consider checking ZIP code data type first and second memeber according to ZIP code schema
 	if (client_req.preferredZipCode != 0) {
-		std::vector<std::vector<listElement>> splitLists = listSplitter(client_req, full_list);
+		std::vector<std::vector<int>> splitLists = listSplitter(client_req, full_list);
 
 		for (size_t i = 0; i < splitLists[0].size(); i++) {
 			if (listToReturn.size() < static_cast<size_t>(client_req.numOfNames)) {
-				if (!(std::find(hash.begin(), hash.end(), splitLists[0][i].hash) != hash.end()) && full_list[splitLists[0][i].id].timesSwapped < 3) {
-					full_list[splitLists[0][i].id].timesSwapped++;
-					listToReturn.push_back(splitLists[0][i]);
+				if (!(std::find(hash.begin(), hash.end(), full_list[splitLists[0][i]].hash) != hash.end()) && full_list[splitLists[0][i]].timesSwapped < 3) {
+					full_list[splitLists[0][i]].timesSwapped++;
+					listToReturn.push_back(full_list[splitLists[0][i]]);
 				}
 			} else {
 				break;
@@ -554,9 +554,9 @@ static std::vector<listElement> generateExportableList(const clientRequest& clie
 
 		for (size_t i = 0; i < splitLists[1].size(); i++) {
 			if (listToReturn.size() < static_cast<size_t>(client_req.numOfNames)) {
-				if (!(std::find(hash.begin(), hash.end(), splitLists[1][i].hash) != hash.end()) && full_list[splitLists[1][i].id].timesSwapped < 3) {
-					full_list[splitLists[1][i].id].timesSwapped++;
-					listToReturn.push_back(splitLists[1][i]);
+				if (!(std::find(hash.begin(), hash.end(), full_list[splitLists[1][i]].hash) != hash.end()) && full_list[splitLists[1][i]].timesSwapped < 3) {
+					full_list[splitLists[1][i]].timesSwapped++;
+					listToReturn.push_back(full_list[splitLists[1][i]]);
 				}
 			}
 			else {
@@ -566,9 +566,9 @@ static std::vector<listElement> generateExportableList(const clientRequest& clie
 
 		for (size_t i = 0; i < splitLists[2].size(); i++) {
 			if (listToReturn.size() < static_cast<size_t>(client_req.numOfNames)) {
-				if (!(std::find(hash.begin(), hash.end(), splitLists[2][i].hash) != hash.end()) && full_list[splitLists[2][i].id].timesSwapped < 3) {
-					full_list[splitLists[2][i].id].timesSwapped++;
-					listToReturn.push_back(splitLists[2][i]);
+				if (!(std::find(hash.begin(), hash.end(), full_list[splitLists[2][i]].hash) != hash.end()) && full_list[splitLists[2][i]].timesSwapped < 3) {
+					full_list[splitLists[2][i]].timesSwapped++;
+					listToReturn.push_back(full_list[splitLists[2][i]]);
 				}
 			}
 			else {
