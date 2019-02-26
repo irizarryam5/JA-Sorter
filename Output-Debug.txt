@@ -1,0 +1,23 @@
+﻿'ConsoleApplication1.exe' (Win32): Loaded 'C:\Users\bluei\source\repos\ConsoleApplication1\Release\ConsoleApplication1.exe'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntdll.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel32.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\KernelBase.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbase.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp140.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\vcruntime140.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\vcruntime140.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\vcruntime140.dll'
+The thread 0x6e8 has exited with code 0 (0x0).
+The thread 0x1c28 has exited with code 0 (0x0).
+The thread 0x1fa8 has exited with code 0 (0x0).
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel.appcore.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcrt.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\rpcrt4.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sspicli.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cryptbase.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\bcryptprimitives.dll'. Symbols loaded.
+'ConsoleApplication1.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sechost.dll'. Symbols loaded.
+The thread 0x1974 has exited with code 0 (0x0).
+The thread 0x2a48 has exited with code 0 (0x0).
+The thread 0x3968 has exited with code 0 (0x0).
+The program '[7944] ConsoleApplication1.exe' has exited with code 0 (0x0).
